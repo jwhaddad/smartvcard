@@ -131,88 +131,28 @@
     <div class="md:grid md:grid-cols-2">
       <div class="px-4 mt-32">
         <div ref="create" id="step-1" class="pt-8">
-          <div id="step-6" class="mt-16">
-            <h2 class="font-extrabold text-2xl">
-              Header Image
-            </h2>
-
-            <div class="stepC mt-6">
-              <p class=" ">Select between a logo or cover photo</p>
-              <br />
-              <div class="flex items-center">
-                <div
-                  class="relative group inline-block w-24 h-12 mr-3 align-middle select-none transition duration-200 ease-in bg-gray-700 rounded hover:bg-gray-600 focus:bg-gray-600 cursor-pointer focus:outline-none"
-                  :class="{
-                    'bg-green-600 hover:bg-green-500 focus:bg-green-500': logoOrHeader
-                  }"
-                  tabindex="0"
-                  @click="logoOrHeader = !logoOrHeader"
-                >
-                  <!-- <transition name="slide"> -->
-                  <input
-                    type="checkbox"
-                    :value="logoOrHeader"
-                    id="logoOrHeader"
-                    v-model="logoOrHeader"
-                    class="toggle-switch absolute block w-10 h-10 m-1 rounded border-4 border-transparent appearance-none cursor-pointer transition-colors duration-200 focus:outline-none bg-white"
-                  />
-                </div>
-                <p>
-                  {{ logoOrHeader ? 'Cover Photo' : 'Brand Logo' }}
-                </p>
-
-                <br />
-              </div>
-
-              <div
-                :style="{
-                  display: logoOrHeader ? 'flex' : 'none',
-                  flexDirection: 'column'
-                }"
-              >
-                <div class="stepC">
-                  <Attachment
-                    :content="images"
-                    type="cover"
-                    :resizeImage="resizeImage"
-                    label="Add cover photo"
-                    description="suggested format: svg, jpeg, png or gif"
-                    :showAlert="showAlert"
-                  />
-
-                  <p
-                    class="mt-6 border p-4 rounded border-gray-700 text-gray-400"
-                  >
-                    Recommended cover size is 960 x 640 pixels, with an expect
-                    ratio of 3:2.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                :style="{
-                  display: logoOrHeader == false ? 'flex' : 'none',
-                  flexDirection: 'column'
-                }"
-              >
-                <div class="stepC">
-                  <Attachment
-                    :content="images"
-                    type="logo"
-                    :resizeImage="resizeImage"
-                    label="Upload your brand logo"
-                    description="suggested format: svg, png or gif"
-                    :showAlert="showAlert"
-                  />
-
-                  <p
-                    class="mt-6 border p-4 rounded border-gray-700 text-gray-400"
-                  >
-                    Recommended brand logo size is 350 x 100 pixels.
-                  </p>
-                </div>
-              </div>
-            </div>
+          <h2 class="font-extrabold text-2xl">Header attachments</h2>
+          <div class="stepC">
+            <Attachment
+              :content="images"
+              type="logo"
+              :resizeImage="resizeImage"
+              label="Add logo"
+              description="suggested format: svg, png or gif"
+              :showAlert="showAlert"
+            />
+            <Attachment
+              :content="images"
+              type="cover"
+              :resizeImage="resizeImage"
+              label="Add cover photo"
+              description="suggested format: svg, jpeg, png or gif"
+              :showAlert="showAlert"
+            />
+            <p class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
+              Recommended cover photo size is 960 x 640 pixels, with an aspect
+              ratio of 3:2
+            </p>
           </div>
         </div>
         <div id="step-2" class="mt-16">
@@ -2558,10 +2498,8 @@ export default {
     logoOrHeader: {
       async handler(newValue, oldValue) {
         if (newValue === true) {
-          this.images.logo.url = null
           this.logoOrHeader = true
         } else {
-          this.images.cover.url = null
           this.logoOrHeader = false
         }
       }
