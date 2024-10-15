@@ -496,16 +496,16 @@
             :style="{ backgroundColor: `${colors.mainBg.color}` }"
             class="text"
           >
-            {{ genInfo.beforeTextLink || 'Created with' }}
+            {{ genInfo.beforeTextLink}}
             <a
               class="text"
               :href="
                 `
-              ${genInfo.url || this.defaultUrl}`
+              ${genInfo.url}`
               "
               target="_blank"
               rel="noopener noreferrer"
-              >{{ genInfo.linkedText || 'SMART vCARD' }}</a
+              >{{ genInfo.linkedText}}</a
             >
           </footer>
         </body>

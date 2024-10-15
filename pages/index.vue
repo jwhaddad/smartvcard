@@ -1464,7 +1464,7 @@ export default {
       },
       colors: {
         logoBg: {
-          color: `#1F2937`,
+          color: `#8FBEED`,
           openPalette: false
         },
         mainBg: {
@@ -1472,7 +1472,7 @@ export default {
           openPalette: false
         },
         buttonBg: {
-          color: `#374151`,
+          color: `#C81E20`,
           openPalette: false
         },
         cardBg: {
@@ -2179,7 +2179,7 @@ export default {
         }
       ],
       hostedURL: null,
-      footerCredit: true,
+      footerCredit: false,
       footerCreditCustom: false,
       logoOrHeader: false,
       customFavicon: false,
@@ -2488,9 +2488,13 @@ export default {
     footerCreditCustom: {
       async handler(newValue, oldValue) {
         if (newValue === true) {
-              this.footerCreditCustom = true
-              return
+			this.footerCredit= true
+            this.footerCreditCustom = true
+            return
         }
+		else{
+			this.footerCredit= false
+		}
       },
       deep: true
     },
