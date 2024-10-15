@@ -2502,47 +2502,9 @@ export default {
     simplifyCard: {
       async handler(newValue, oldValue) {
         if (newValue === true) {
-          let isPresent = localStorage.getItem('license_key')
-          if (isPresent !== null) {
-            let licenseKey = localStorage.getItem('license_key')
-            let response = await checkLicense(licenseKey, 'ignore')
-            if (response.status !== 200) {
-              localStorage.removeItem('license_key')
-
-              Swal.fire({
-                title: 'Error!',
-                text:
-                  `${response?.data.message}` ||
-                  'Something bad happened, try again later',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-              })
-              if (response.status === 404) {
-                const elem = this.$refs.myPurchaseBtn
-                elem.click()
-              }
-              if (response.status === 400) {
-                // alert('BYE BYE TA TA')
-                this.simplifyCard = false
-                localStorage.removeItem('license_key')
-              }
-            } else if (response.status === 200) {
               this.simplifyCard = true
               return
-            }
-          } else {
-            this.simplifyCard = false
-            // alert('Please login or buy an agency')
-            Swal.fire({
-              title: 'Error!',
-              html: 'Please login or buy an agency',
-              icon: 'error',
-              confirmButtonText: 'Ok',
-              timer: 1000
-            })
-            const elem = this.$refs.myPurchaseBtn
-            elem.click()
-          }
+
         }
       },
       deep: true
@@ -2550,50 +2512,8 @@ export default {
     isFeaturedOn: {
       async handler(newValue, oldValue) {
         if (newValue === true) {
-          let isPresent = localStorage.getItem('license_key')
-          if (isPresent !== null) {
-            let licenseKey = localStorage.getItem('license_key')
-            let response = await checkLicense(licenseKey, 'ignore')
-            if (response.status !== 200) {
-              localStorage.removeItem('license_key')
-              // alert(
-              //   `ERROR CODE:- ${response.status} REASON: ${response.data.message}`
-              // )
-              Swal.fire({
-                title: 'Error!',
-                text:
-                  `${response?.data.message}` ||
-                  'Something bad happened, try again later',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-              })
-              if (response.status === 404) {
-                const elem = this.$refs.myPurchaseBtn
-                elem.click()
-              }
-              if (response.status === 400) {
-                // alert('BYE BYE TA TA')
-
-                this.isFeaturedOn = true
-                localStorage.removeItem('license_key')
-              }
-            } else if (response.status === 200) {
-              this.isFeaturedOn = true
-              return
-            }
-          } else {
-            this.isFeaturedOn = false
-            // alert('Please login or buy an agency')
-            Swal.fire({
-              title: 'Error!',
-              html: 'Please login or buy an agency',
-              icon: 'error',
-              confirmButtonText: 'Ok',
-              timer: 1000
-            })
-            const elem = this.$refs.myPurchaseBtn
-            elem.click()
-          }
+		  this.isFeaturedOn = true
+		  return
         }
       },
       deep: true
@@ -2601,49 +2521,8 @@ export default {
     customFavicon: {
       async handler(newValue, oldValue) {
         if (newValue === true) {
-          let isPresent = localStorage.getItem('license_key')
-          if (isPresent !== null) {
-            let licenseKey = localStorage.getItem('license_key')
-            let response = await checkLicense(licenseKey, 'ignore')
-
-            if (response.status !== 200) {
-              localStorage.removeItem('license_key')
-              // alert(
-              //   `ERROR CODE:- ${response.status} REASON: ${response.data.message}`
-              // )
-              Swal.fire({
-                title: 'Error!',
-                text:
-                  `${response?.data.message}` ||
-                  'Something bad happened, try again later',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-              })
-              if (response.status === 404) {
-                const elem = this.$refs.myPurchaseBtn
-                elem.click()
-              }
-              if (response.status === 400) {
-                this.customFavicon = false
-                localStorage.removeItem('license_key')
-              }
-            } else if (response.status === 200) {
-              this.customFavicon = true
-              return
-            }
-          } else {
-            this.customFavicon = false
-            // alert('Please login or buy an agency')
-            Swal.fire({
-              title: 'Error!',
-              html: 'Please login or buy an agency',
-              icon: 'error',
-              confirmButtonText: 'Ok',
-              timer: 1000
-            })
-            const elem = this.$refs.myPurchaseBtn
-            elem.click()
-          }
+		  this.customFavicon = true
+		  return
         }
       },
       deep: true
@@ -2651,47 +2530,8 @@ export default {
     shareImage: {
       async handler(newValue, oldValue) {
         if (newValue === true) {
-          let isPresent = localStorage.getItem('license_key')
-          if (isPresent !== null) {
-            let licenseKey = localStorage.getItem('license_key')
-            let response = await checkLicense(licenseKey, 'ignore')
-
-            if (response.status !== 200) {
-              localStorage.removeItem('license_key')
-              Swal.fire({
-                title: 'Error!',
-                text:
-                  `${response?.data.message}` ||
-                  'Something bad happened, try again later',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-              })
-              if (response.status === 404) {
-                const elem = this.$refs.myPurchaseBtn
-                elem.click()
-              }
-              if (response.status === 400) {
-                // alert('BYE BYE TA TA')
-                this.shareImage = false
-                localStorage.removeItem('license_key')
-              }
-            } else if (response.status === 200) {
-              this.shareImage = true
-              return
-            }
-          } else {
-            this.shareImage = false
-            // alert('Please login or buy an agency')
-            Swal.fire({
-              title: 'Error!',
-              html: 'Please login or buy an agency',
-              icon: 'error',
-              confirmButtonText: 'Ok',
-              timer: 1000
-            })
-            const elem = this.$refs.myPurchaseBtn
-            elem.click()
-          }
+			  this.shareImage = true
+			  return
         }
       },
       deep: true
@@ -2699,48 +2539,8 @@ export default {
     bookMarkImage: {
       async handler(newValue, oldValue) {
         if (newValue === true) {
-          let isPresent = localStorage.getItem('license_key')
-          if (isPresent !== null) {
-            let licenseKey = localStorage.getItem('license_key')
-            let response = await checkLicense(licenseKey, 'ignore')
-
-            if (response.status !== 200) {
-              localStorage.removeItem('license_key')
-
-              Swal.fire({
-                title: 'Error!',
-                text:
-                  `${response?.data.message}` ||
-                  'Something bad happened, try again later',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-              })
-              if (response.status === 404) {
-                const elem = this.$refs.myPurchaseBtn
-                elem.click()
-              }
-              if (response.status === 400) {
-                // alert('BYE BYE TA TA')
-                this.bookMarkImage = false
-                localStorage.removeItem('license_key')
-              }
-            } else if (response.status === 200) {
-              this.bookMarkImage = true
-              return
-            }
-          } else {
-            this.bookMarkImage = false
-
-            Swal.fire({
-              title: 'Error!',
-              html: 'Please login or buy an agency',
-              icon: 'error',
-              confirmButtonText: 'Ok',
-              timer: 1000
-            })
-            const elem = this.$refs.myPurchaseBtn
-            elem.click()
-          }
+			this.bookMarkImage = true
+            return
         }
       },
       deep: true
@@ -2748,47 +2548,8 @@ export default {
     footerCreditCustom: {
       async handler(newValue, oldValue) {
         if (newValue === true) {
-          let isPresent = localStorage.getItem('license_key')
-          if (isPresent !== null) {
-            let licenseKey = localStorage.getItem('license_key')
-            let response = await checkLicense(licenseKey, 'ignore')
-            if (response.status !== 200) {
-              localStorage.removeItem('license_key')
-
-              Swal.fire({
-                title: 'Error!',
-                text:
-                  `${response?.data.message}` ||
-                  'Something bad happened, try again later',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-              })
-              if (response.status === 404) {
-                const elem = this.$refs.myPurchaseBtn
-                elem.click()
-              }
-              if (response.status === 400) {
-                // alert('BYE BYE TA TA')
-                this.footerCreditCustom = false
-                localStorage.removeItem('license_key')
-              }
-            } else if (response.status === 200) {
               this.footerCreditCustom = true
               return
-            }
-          } else {
-            this.footerCreditCustom = false
-
-            Swal.fire({
-              title: 'Error!',
-              html: 'Please login or buy an agency',
-              icon: 'error',
-              confirmButtonText: 'Ok',
-              timer: 1000
-            })
-            const elem = this.$refs.myPurchaseBtn
-            elem.click()
-          }
         }
       },
       deep: true

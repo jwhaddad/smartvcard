@@ -45,8 +45,8 @@ window.Swal = swal
 export default {
   data() {
     return {
-      isLoading: true,
-      isLoggedIn: false,
+      isLoading: false,
+      isLoggedIn: true,
       licenseKey: ''
     }
   },
@@ -57,7 +57,7 @@ export default {
         let myresponse = await logOut(key)
         if (myresponse.status === 200) {
           localStorage.removeItem('license_key')
-          this.isLoggedIn = false
+          this.isLoggedIn = true
           window.location.reload()
         }
       } else {
@@ -67,38 +67,6 @@ export default {
         } else {
           let response = await checkLicense(this.licenseKey, 'login')
           // console.log('My response', response?.data.message)
-          if (response.status !== 200) {
-            this.licenseKey = ''
-            // alert(
-            //   `ERROR CODE:- ${response.status} REASON: ${response.data.message}`
-            // )
-            Swal.fire({
-              title: 'Error!',
-              html:
-                `${response?.data.message}` ||
-                'Something bad happened, try again later',
-              icon: 'error',
-              confirmButtonText: 'Ok'
-            })
-            if (response.status === 404) {
-              setTimeout(() => {
-                const elem = this.$refs.myPurchaseBtn
-                elem.click()
-              }, 2000)
-            }
-            if (response.status === 400) {
-              Swal.fire({
-                title: 'Error!',
-                text:
-                  `${response?.data.message}` ||
-                  'Something bad happened, try again later',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-              })
-              // alert('BYE BYE TA TA')
-              return
-            }
-          } else if (response.status === 200) {
             localStorage.setItem('license_key', response.data.license_key)
             this.licenseKey = ''
             this.isLoggedIn = true
@@ -110,7 +78,6 @@ export default {
             })
             return
             // console.log('RESPONSE SHAREEEF', response)
-          }
           //check the key, if true, login, else fail.
           // this.isLoggedIn = true
           // console.log(this.isLoggedIn)
@@ -127,39 +94,16 @@ export default {
       let licenseKey = localStorage.getItem('license_key')
       let response = await checkLicense(licenseKey, 'ignore')
       // console.log('My response', response)
-      if (response.status !== 200) {
-        this.isLoading = false
-        localStorage.removeItem('license_key')
-        // alert(
-        //   `ERROR CODE:- ${response.status} REASON: `
-        // )
-        Swal.fire({
-          title: 'Error!',
-          html:
-            `${response?.data.message}` ||
-            'Something bad happened, try again later',
-          icon: 'error',
-          confirmButtonText: 'Ok'
-        })
-        if (response.status === 404) {
-          const elem = this.$refs.myPurchaseBtn
-          elem.click()
-        }
-        if (response.status === 400) {
-          localStorage.removeItem('license_key')
-        }
-      } else if (response.status === 200) {
         this.isLoading = false
         this.isLoggedIn = true
         return
         // console.log('RESPONSE SHAREEEF', response)
-      }
       this.isLoading = false
     } else {
       this.isLoading = false
     }
     // setTimeout(() => {
-    //   this.isLoggedIn = true
+       this.isLoggedIn = true
     // }, 2000)
     // console.log(`the component is now mounted.`)
   }
